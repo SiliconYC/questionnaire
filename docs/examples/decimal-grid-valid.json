@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "experiment": {
+    "title": "小数网格校验 · 构造示例",
+    "description": "验证合法两位小数不会被二进制浮点误差拒绝；不代表实际感官实验的量表设计。",
+    "instructions": "合法分值为 0.29、0.36、0.43、0.50、0.57；0.30 不在网格上，0.291 超出精度。",
+    "time_zone": "Asia/Shanghai",
+    "opens_at": null,
+    "closes_at": null,
+    "display_sample_names": false,
+    "design": "within_subject_complete",
+    "sample_order": "fixed"
+  },
+  "samples": [
+    { "sample_id": "s_a", "code": "001", "admin_name": "构造样品 A", "display_name": "" },
+    { "sample_id": "s_b", "code": "002", "admin_name": "构造样品 B", "display_name": "" }
+  ],
+  "indicators": [
+    {
+      "indicator_id": "decimal_grid",
+      "category": "校验示例",
+      "label": "两位小数网格",
+      "description": "仅用于校验契约。",
+      "kind": "continuous",
+      "min": 0.29,
+      "max": 0.57,
+      "step": 0.07,
+      "required": true,
+      "allow_not_evaluable": false,
+      "direction": "neutral",
+      "analysis_scale": "interval",
+      "anchors": []
+    }
+  ],
+  "text_questions": []
+}

@@ -1,0 +1,72 @@
+{
+  "description": "每个案例独立以 experiment-valid.json 为基准，应用给出的 JSON Pointer 替换/添加操作。它们是配置校验的构造示例，不是需要导入的实验。",
+  "base_file": "experiment-valid.json",
+  "cases": [
+    {
+      "case_id": "duplicate_sample_id",
+      "changes": [{ "op": "replace", "path": "/samples/1/sample_id", "value": "s_a" }],
+      "expected_error_code": "DUPLICATE_ID"
+    },
+    {
+      "case_id": "duplicate_sample_code_after_trim",
+      "changes": [{ "op": "replace", "path": "/samples/1/code", "value": " 001 " }],
+      "expected_error_code": "DUPLICATE_CODE"
+    },
+    {
+      "case_id": "unknown_top_level_key",
+      "changes": [{ "op": "add", "path": "/admin_password", "value": "invalid-example-not-a-real-secret" }],
+      "expected_error_code": "UNKNOWN_FIELD"
+    },
+    {
+      "case_id": "reversed_scale",
+      "changes": [{ "op": "replace", "path": "/indicators/1/min", "value": 10 }],
+      "expected_error_code": "INVALID_RANGE"
+    },
+    {
+      "case_id": "non_dividing_step",
+      "changes": [{ "op": "replace", "path": "/indicators/1/step", "value": 0.3 }],
+      "expected_error_code": "INVALID_STEP"
+    },
+    {
+      "case_id": "decimal_precision_exceeded",
+      "changes": [{ "op": "replace", "path": "/indicators/1/step", "value": 0.071 }],
+      "expected_error_code": "DECIMAL_PRECISION"
+    },
+    {
+      "case_id": "anchor_overlap",
+      "changes": [{ "op": "replace", "path": "/indicators/0/anchors/1/from", "value": 3.5 }],
+      "expected_error_code": "ANCHOR_OVERLAP"
+    },
+    {
+      "case_id": "anchor_gap",
+      "changes": [{ "op": "replace", "path": "/indicators/0/anchors/1/from", "value": 4.5 }],
+      "expected_error_code": "ANCHOR_GAP"
+    },
+    {
+      "case_id": "unsupported_version",
+      "changes": [{ "op": "replace", "path": "/schema_version", "value": "9.0.0" }],
+      "expected_error_code": "UNSUPPORTED_VERSION"
+    },
+    {
+      "case_id": "reversed_schedule",
+      "changes": [
+        { "op": "replace", "path": "/experiment/opens_at", "value": "2030-01-02T08:00:00+08:00" },
+        { "op": "replace", "path": "/experiment/closes_at", "value": "2030-01-01T08:00:00+08:00" }
+      ],
+      "expected_error_code": "INVALID_TIME_WINDOW"
+    },
+    {
+      "case_id": "numeric_sample_code",
+      "changes": [{ "op": "replace", "path": "/samples/0/code", "value": 1 }],
+      "expected_error_code": "INVALID_TYPE"
+    },
+    {
+      "case_id": "missing_visible_name",
+      "changes": [
+        { "op": "replace", "path": "/experiment/display_sample_names", "value": true },
+        { "op": "replace", "path": "/samples/0/display_name", "value": "" }
+      ],
+      "expected_error_code": "EMPTY_DISPLAY_NAME"
+    }
+  ]
+}

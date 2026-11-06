@@ -1,0 +1,260 @@
+{
+  "schema_version": "1.0.0",
+  "purpose": "人工构造的计算核对资料，不是真实实验结果。样品与指标为独立测试定义，不与 experiment-valid.json 混用。",
+  "numeric_tolerance": 1e-10,
+  "descriptive_case": {
+    "indicator_id": "reference_score",
+    "scale": {
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "analysis_scale": "interval"
+    },
+    "sample_ids": [
+      "s_a",
+      "s_b",
+      "s_c"
+    ],
+    "rows": [
+      {
+        "participant_code": "P001",
+        "s_a": 2,
+        "s_b": 4,
+        "s_c": 5
+      },
+      {
+        "participant_code": "P002",
+        "s_a": 3,
+        "s_b": 5,
+        "s_c": 5
+      },
+      {
+        "participant_code": "P003",
+        "s_a": 4,
+        "s_b": 4,
+        "s_c": 6
+      },
+      {
+        "participant_code": "P004",
+        "s_a": 2,
+        "s_b": 3,
+        "s_c": 4
+      },
+      {
+        "participant_code": "P005",
+        "s_a": 5,
+        "s_b": 6,
+        "s_c": 7
+      },
+      {
+        "participant_code": "P006",
+        "s_a": 4,
+        "s_b": 5,
+        "s_c": 8
+      }
+    ],
+    "expected": {
+      "s_a": {
+        "n_valid": 6,
+        "n_missing": 0,
+        "mean": 3.3333333333333335,
+        "sd": 1.2110601416389968,
+        "median": 3.5,
+        "q1": 2.25,
+        "q3": 4,
+        "min": 2,
+        "max": 5
+      },
+      "s_b": {
+        "n_valid": 6,
+        "n_missing": 0,
+        "mean": 4.5,
+        "sd": 1.0488088481701516,
+        "median": 4.5,
+        "q1": 4,
+        "q3": 5,
+        "min": 3,
+        "max": 6
+      },
+      "s_c": {
+        "n_valid": 6,
+        "n_missing": 0,
+        "mean": 5.833333333333333,
+        "sd": 1.4719601443879744,
+        "median": 5.5,
+        "q1": 5,
+        "q3": 6.75,
+        "min": 4,
+        "max": 8
+      }
+    },
+    "reference_method": "均值和样本标准差按定义；分位数采用 type 7。实施阶段仍需用独立成熟统计库复核。"
+  },
+  "two_sample_analytic_case": {
+    "indicator_id": "paired_reference",
+    "sample_ids": [
+      "s_a",
+      "s_b"
+    ],
+    "rows": [
+      {
+        "participant_code": "P001",
+        "s_a": 0,
+        "s_b": 0
+      },
+      {
+        "participant_code": "P002",
+        "s_a": 1,
+        "s_b": 0
+      },
+      {
+        "participant_code": "P003",
+        "s_a": 2,
+        "s_b": 0
+      }
+    ],
+    "expected": {
+      "n_complete": 3,
+      "ss_sample": 1.5,
+      "ss_error": 1,
+      "df1": 1,
+      "df2": 2,
+      "epsilon": 1,
+      "f": 3,
+      "partial_eta_squared": 0.6,
+      "mean_difference": 1,
+      "sd_difference": 1,
+      "t": 1.7320508075688772,
+      "paired_df": 2,
+      "p_raw": 0.2254033307585166,
+      "holm_family_size": 2,
+      "p_adjusted_omnibus": 0.4508066615170332,
+      "p_adjusted_pair": 0.4508066615170332
+    },
+    "analytic_reference": "配对差为 0,1,2，均值1，样本SD1，因此t=sqrt(3)、F=t²=3。t分布自由度2的双侧尾概率为1-sqrt(3/5)。同一族含总体与配对两项，Holm调整值均为2p。需在M3用成熟库作独立复核。"
+  },
+  "edge_cases": [
+    {
+      "case_id": "one_observation",
+      "values": [
+        4
+      ],
+      "expected": {
+        "n_valid": 1,
+        "n_missing": 0,
+        "mean": 4,
+        "sd": null,
+        "median": 4,
+        "q1": 4,
+        "q3": 4,
+        "min": 4,
+        "max": 4
+      }
+    },
+    {
+      "case_id": "no_observations",
+      "values": [],
+      "expected": {
+        "n_valid": 0,
+        "n_missing": 0,
+        "mean": null,
+        "sd": null,
+        "median": null,
+        "q1": null,
+        "q3": null,
+        "min": null,
+        "max": null
+      }
+    },
+    {
+      "case_id": "constant_pair_difference",
+      "matrix": [
+        [
+          1,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "expected_omnibus_status": "ZERO_RESIDUAL_VARIANCE",
+      "expected_pair_status": "ZERO_PAIR_DIFF_VARIANCE",
+      "expected_pair_mean_difference": -1
+    },
+    {
+      "case_id": "all_constant",
+      "matrix": [
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          5
+        ],
+        [
+          5,
+          5
+        ]
+      ],
+      "expected_omnibus_status": "ZERO_RESIDUAL_VARIANCE",
+      "expected_pair_status": "ZERO_PAIR_DIFF_VARIANCE"
+    },
+    {
+      "case_id": "missing_one_subject",
+      "matrix": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          null
+        ]
+      ],
+      "expected_n_complete": 2,
+      "expected_status": "INSUFFICIENT_COMPLETE_SUBJECTS"
+    },
+    {
+      "case_id": "zero_is_valid",
+      "values": [
+        0,
+        0,
+        0
+      ],
+      "expected": {
+        "n_valid": 3,
+        "n_missing": 0,
+        "mean": 0,
+        "sd": 0,
+        "median": 0,
+        "q1": 0,
+        "q3": 0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "case_id": "holm_unsorted",
+      "p_raw": [
+        0.03,
+        0.001,
+        0.04
+      ],
+      "expected_p_adjusted": [
+        0.06,
+        0.003,
+        0.06
+      ]
+    }
+  ]
+}
