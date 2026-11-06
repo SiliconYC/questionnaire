@@ -68,5 +68,3 @@ declare u uuid; affected_experiments uuid[]; n integer; batch uuid; begin
 end $$;
 revoke all on all functions in schema app_private from public, anon, authenticated;
 commit;
-
-

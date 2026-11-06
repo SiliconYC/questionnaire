@@ -83,4 +83,3 @@ grant execute on function public.api_record_export(jsonb) to authenticated;
 revoke all on all functions in schema app_private from public, anon, authenticated;
 revoke all on all tables in schema app_private from public, anon, authenticated;
 commit;
-

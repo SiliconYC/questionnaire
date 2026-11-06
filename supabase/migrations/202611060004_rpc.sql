@@ -252,7 +252,3 @@ exception
     return jsonb_build_object('ok',false,'error',jsonb_build_object('code','SERVICE_UNAVAILABLE','message','真实服务暂时不可用。','retryable',true),'request_id',req);
 end $$;
 commit;
-
-
-
-

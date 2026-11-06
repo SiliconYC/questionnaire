@@ -30,4 +30,3 @@ insert into app_private.validators(name,schema) values
 ('api_get_analysis_snapshot', '{"type":"object","additionalProperties":false,"properties":{"snapshot_id":{"type":"string","format":"uuid"},"cursor":{"type":["string","null"],"maxLength":200},"limit":{"type":"integer","minimum":1,"maximum":100}},"required":["snapshot_id"]}'::jsonb),
 ('api_record_export', '{"type":"object","additionalProperties":false,"properties":{"snapshot_id":{"type":"string","format":"uuid"},"idempotency_key":{"type":"string","format":"uuid"},"format":{"type":"string","enum":["xlsx","csv"]},"dataset_kind":{"type":"string","enum":["numeric","text","all"]}},"required":["snapshot_id","idempotency_key","format","dataset_kind"]}'::jsonb);
 commit;
-

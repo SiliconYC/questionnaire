@@ -79,4 +79,3 @@ declare x jsonb; def jsonb; v numeric; lo numeric; st numeric; k text; begin
   end loop;
 end $$;
 commit;
-
