@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "experiment": {
+    "title": "烘焙样品感官评价 · 示例",
+    "description": "人工构造的演示实验，用于验证多样品、数字量表、档位说明与文字反馈。",
+    "instructions": "请按样品编码逐一评价。每个样品独立填写，分数没有预设答案。此文件不含真实实验数据。",
+    "time_zone": "Asia/Shanghai",
+    "opens_at": null,
+    "closes_at": null,
+    "display_sample_names": false,
+    "design": "within_subject_complete",
+    "sample_order": "fixed"
+  },
+  "samples": [
+    { "sample_id": "s_a", "code": "001", "admin_name": "配方 A", "display_name": "样品 A" },
+    { "sample_id": "s_b", "code": "002", "admin_name": "配方 B", "display_name": "样品 B" },
+    { "sample_id": "s_c", "code": "003", "admin_name": "配方 C", "display_name": "样品 C" }
+  ],
+  "indicators": [
+    {
+      "indicator_id": "color_depth",
+      "category": "外观",
+      "label": "色泽深度",
+      "description": "观察表面颜色深浅；深色不自动代表品质更好。本示例按等距评分演示分析。",
+      "kind": "anchored",
+      "min": 1,
+      "max": 10,
+      "step": 0.5,
+      "required": true,
+      "allow_not_evaluable": false,
+      "direction": "neutral",
+      "analysis_scale": "interval",
+      "anchors": [
+        { "label": "浅色", "from": 1, "to": 4 },
+        { "label": "中等色泽", "from": 4, "to": 7 },
+        { "label": "深褐色", "from": 7, "to": 10 }
+      ]
+    },
+    {
+      "indicator_id": "roasted_aroma",
+      "category": "香气",
+      "label": "烘烤香气强度",
+      "description": "0 表示没有感知到，10 表示非常强烈。强度不等于喜好。",
+      "kind": "continuous",
+      "min": 0,
+      "max": 10,
+      "step": 0.1,
+      "required": true,
+      "allow_not_evaluable": true,
+      "direction": "neutral",
+      "analysis_scale": "interval",
+      "anchors": []
+    },
+    {
+      "indicator_id": "liking_rank",
+      "category": "综合感受",
+      "label": "整体喜好等级",
+      "description": "1 表示非常不喜欢，9 表示非常喜欢。本示例按有序等级解释，仅做描述，不进入参数推断。",
+      "kind": "continuous",
+      "min": 1,
+      "max": 9,
+      "step": 1,
+      "required": true,
+      "allow_not_evaluable": false,
+      "direction": "higher_better",
+      "analysis_scale": "ordinal",
+      "anchors": []
+    }
+  ],
+  "text_questions": [
+    {
+      "text_question_id": "texture_note",
+      "label": "咀嚼与口感描述",
+      "description": "可描述酥脆、柔软、干燥等感受，无需使用固定词语。",
+      "required": false,
+      "max_length": 500
+    },
+    {
+      "text_question_id": "other_note",
+      "label": "其他意见",
+      "description": "请勿填写真实姓名、电话号码或其他不必要的个人资料。",
+      "required": false,
+      "max_length": 500
+    }
+  ]
+}
