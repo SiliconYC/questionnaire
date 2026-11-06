@@ -31,3 +31,4 @@ dist/
 .claude
 .superpowers
 docs/superpowers
+*.tsbuildinfo
