@@ -1,8 +1,33 @@
-.DS_Store
+# 通用临时文件
+**/__pycache__/
+**/.DS_Store
+.cache
+*.tmp
+*.temp
+*.bak
 Thumbs.db
-node_modules/
-dist/
+
+# 日志
+*.log
+
+# React 包和产物
+node_modules
+.vite/
+**/.vite/
 .env
 .env.*
 !.env.example
-*.log
+dist/
+
+# 本地测试缓存
+**/.pytest_cache/
+*.pyc
+*.pyo
+*.swp
+*.swo
+/本地测试留痕/
+
+# AI Agents 遗留文件
+.claude
+.superpowers
+docs/superpowers
